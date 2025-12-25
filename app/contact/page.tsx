@@ -163,14 +163,14 @@ export default function ContactPage() {
             </section>
 
             {/* Contact Info Cards */}
-            <section className="py-20 bg-white">
+            <section className="py-32 bg-white">
                 <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { icon: MapPin, title: "Visit Us", info: ["123 Tourism Dr", "Colombo 03, Sri Lanka"] },
-                            { icon: Mail, title: "Email Us", info: ["hello@smtours.lk", "bookings@smtours.lk"] },
-                            { icon: Phone, title: "Call Us", info: ["+94 77 123 4567", "+94 11 234 5678"] },
-                            { icon: Clock, title: "Office Hours", info: ["Mon-Fri: 9AM - 6PM", "Weekend: 10AM - 4PM"] }
+                            { icon: MapPin, title: "Visit Us", info: ["123 Tourism Dr", "Colombo 03, Sri Lanka"], label: "LOCATION" },
+                            { icon: Mail, title: "Email Us", info: ["hello@smtours.lk", "bookings@smtours.lk"], label: "EMAIL" },
+                            { icon: Phone, title: "Call Us", info: ["+94 77 123 4567", "+94 11 234 5678"], label: "PHONE" },
+                            { icon: Clock, title: "Office Hours", info: ["Mon-Fri: 9AM - 6PM", "Weekend: 10AM - 4PM"], label: "HOURS" }
                         ].map((item, index) => (
                             <motion.div
                                 key={index}
@@ -178,14 +178,40 @@ export default function ContactPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                 viewport={{ once: true }}
-                                whileHover={{ y: -5 }}
-                                className="p-8 bg-black text-white group hover:bg-secondary hover:text-black transition-colors duration-500"
+                                whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
+                                className="relative p-10 bg-white border-2 border-black/10 group hover:border-secondary transition-all duration-500 overflow-hidden"
                             >
-                                <item.icon className="h-10 w-10 mb-6" />
-                                <h3 className="text-xl font-bold mb-4 uppercase tracking-wider">{item.title}</h3>
-                                {item.info.map((line, i) => (
-                                    <p key={i} className="opacity-80 mb-1">{line}</p>
-                                ))}
+                                {/* Corner Accent */}
+                                <div className="absolute top-0 right-0 w-20 h-20 bg-secondary/10 -translate-y-10 translate-x-10 group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500" />
+
+                                {/* Label Badge */}
+                                <div className="inline-block mb-6">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-secondary/60 group-hover:text-secondary transition-colors">
+                                        {item.label}
+                                    </span>
+                                </div>
+
+                                {/* Icon */}
+                                <div className="w-16 h-16 bg-black group-hover:bg-secondary rounded-full flex items-center justify-center mb-8 transition-colors duration-500">
+                                    <item.icon className="h-8 w-8 text-white group-hover:text-black transition-colors duration-500" />
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="text-2xl font-serif font-bold mb-6 text-black">
+                                    {item.title}
+                                </h3>
+
+                                {/* Separator */}
+                                <div className="h-[2px] w-12 bg-secondary mb-6" />
+
+                                {/* Info */}
+                                <div className="space-y-2">
+                                    {item.info.map((line, i) => (
+                                        <p key={i} className="text-gray-600 text-sm leading-relaxed">
+                                            {line}
+                                        </p>
+                                    ))}
+                                </div>
                             </motion.div>
                         ))}
                     </div>
