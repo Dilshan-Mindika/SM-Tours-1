@@ -32,13 +32,13 @@ export default function ToursPage() {
 
         // 1. Filter by Category
         if (activeCategory !== "All") {
-            result = result.filter(tour => tour.category === activeCategory);
+            result = result.filter((tour: Tour) => tour.category === activeCategory);
         }
 
         // 2. Filter by Search Query
         if (searchQuery) {
             const query = searchQuery.toLowerCase();
-            result = result.filter(tour =>
+            result = result.filter((tour: Tour) =>
                 tour.title.toLowerCase().includes(query) ||
                 tour.description.toLowerCase().includes(query)
             );
@@ -124,7 +124,7 @@ export default function ToursPage() {
                 >
                     <AnimatePresence mode="popLayout">
                         {filteredAndSortedTours.length > 0 ? (
-                            filteredAndSortedTours.map((tour) => (
+                            filteredAndSortedTours.map((tour: Tour) => (
                                 <TourCard
                                     key={tour.id}
                                     title={tour.title}
