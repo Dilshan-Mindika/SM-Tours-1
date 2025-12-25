@@ -9,25 +9,25 @@ import { useState } from "react";
 const destinations = [
     {
         name: "Sigiriya",
-        image: "https://images.unsplash.com/photo-1620023604328-98e3b3c375c3?q=80&w=1974&auto=format&fit=crop",
+        image: "/destinations/sigiriya.jpg",
         id: "sigiriya",
         desc: "The Lion Rock Fortress"
     },
     {
         name: "Ella",
-        image: "https://images.unsplash.com/photo-1598324789736-4861f89564a0?q=80&w=1974&auto=format&fit=crop",
+        image: "/destinations/ella.jpg",
         id: "ella",
         desc: "Misty Mountain Peaks"
     },
     {
         name: "Galle",
-        image: "https://images.unsplash.com/photo-1555547432-d85c18684242?q=80&w=2080&auto=format&fit=crop",
+        image: "/destinations/galle.jpg",
         id: "galle",
         desc: "Portuguese Heritage"
     },
     {
         name: "Yala",
-        image: "https://images.unsplash.com/photo-1546708773-e575a556da8e?q=80&w=2070&auto=format&fit=crop",
+        image: "/destinations/yala.jpg",
         id: "yala",
         desc: "Safari & Wilderness"
     }
