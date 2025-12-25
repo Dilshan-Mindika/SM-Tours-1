@@ -227,8 +227,8 @@ export default function DestinationsPage() {
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-8 py-3 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === cat
-                                        ? "bg-black text-white shadow-lg scale-105"
-                                        : "bg-white text-gray-500 hover:bg-gray-200"
+                                    ? "bg-black text-white shadow-lg scale-105"
+                                    : "bg-white text-gray-500 hover:bg-gray-200"
                                     }`}
                             >
                                 {cat}
@@ -239,7 +239,7 @@ export default function DestinationsPage() {
                     {/* Grid */}
                     <motion.div
                         layout
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8"
                     >
                         <AnimatePresence mode="popLayout">
                             {filteredDestinations.map((dest) => (

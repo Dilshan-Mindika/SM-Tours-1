@@ -72,7 +72,7 @@ export function ParallaxGallery() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h2 className="text-6xl md:text-9xl font-serif text-white tracking-tight mb-6">
+                    <h2 className="text-4xl sm:text-6xl md:text-9xl font-serif text-white tracking-tight mb-6">
                         Explore <span className="italic text-secondary">Sri Lanka</span>
                     </h2>
                     <div className="flex items-center justify-center gap-4 mb-4">

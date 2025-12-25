@@ -38,7 +38,7 @@ export function TourCard({ id, title, image, duration, location, description, ca
                 <div className="p-8 flex flex-col flex-grow relative z-10">
                     <div className="mb-4">
                         <span className="text-secondary text-xs font-bold uppercase tracking-[0.15em] mb-3 block">Exclusive Tour</span>
-                        <h3 className="text-3xl font-serif font-bold text-black group-hover:text-secondary transition-colors duration-300 leading-tight">
+                        <h3 className="text-2xl md:text-3xl font-serif font-bold text-black group-hover:text-secondary transition-colors duration-300 leading-tight">
                             {title}
                         </h3>
                     </div>
