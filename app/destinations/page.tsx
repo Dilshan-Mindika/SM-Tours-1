@@ -4,252 +4,218 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { PageHeader } from "@/components/sections/PageHeader";
-import { MapPin, ArrowRight, Filter } from "lucide-react";
+import { MapPin, ArrowRight, Search, Compass, Calendar, Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-// Categorized Destinations Data - COMPREHENSIVE LIST
-const allDestinations = [
-    // HERITAGE (Cultural Triangle & History)
+// --- Data with Bento Sizes ---
+type DestinationSize = "normal" | "large" | "wide" | "tall";
+
+interface Destination {
+    id: string;
+    name: string;
+    category: string;
+    image: string;
+    desc: string;
+    badges: string[];
+    size: DestinationSize;
+    meta: string; // e.g., "Best: Dec-Apr" or "3h from Colombo"
+}
+
+const allDestinations: Destination[] = [
+    // Highlight: Sigiriya (Large)
     {
         id: "sigiriya",
         name: "Sigiriya",
         category: "Heritage",
-        image: "/destinations/sigiriya.jpg",
+        image: "/destinations/dest-sigiriya.jpg",
         desc: "The Lion Rock fortress, a UNESCO World Heritage site standing majestic amidst the jungle.",
-        badges: ["History", "Architecture"]
+        badges: ["History", "Iconic"],
+        size: "large",
+        meta: "Best: Jan-Apr"
+    },
+    // Highlight: Ella (Tall)
+    {
+        id: "ella",
+        name: "Ella",
+        category: "Nature",
+        image: "/destinations/dest-ella.jpg",
+        desc: "A hiking paradise in the central highlands with the Nine Arch Bridge.",
+        badges: ["Hiking", "Views"],
+        size: "tall",
+        meta: "Cool Climate"
     },
     {
         id: "anuradhapura",
         name: "Anuradhapura",
         category: "Heritage",
-        image: "/destinations/redesign/anuradhapura.jpg",
-        desc: "One of the oldest continuously inhabited cities in the world, known for its well-preserved ruins.",
-        badges: ["Ruins", "Buddhism"]
+        image: "/destinations/dest-anuradhapura.jpg",
+        desc: "Ancient capital with well-preserved ruins.",
+        badges: ["Ruins"],
+        size: "normal",
+        meta: "UNESCO Site"
     },
+    // Highlight: Yala (Wide)
     {
-        id: "polonnaruwa",
-        name: "Polonnaruwa",
-        category: "Heritage",
-        image: "/destinations/redesign/polonnaruwa.jpg",
-        desc: "The second most ancient of Sri Lanka's kingdoms, featuring monumental ancient stone structures.",
-        badges: ["Ruins", "Kingdom"]
+        id: "yala",
+        name: "Yala National Park",
+        category: "Wildlife",
+        image: "/destinations/dest-yala.jpg",
+        desc: "The premier sanctuary for leopard sightings.",
+        badges: ["Safari", "Leopards"],
+        size: "wide",
+        meta: "High Density"
     },
     {
         id: "kandy",
         name: "Kandy",
         category: "Heritage",
-        image: "/gallery/temple.jpg",
-        desc: "The cultural capital, home to the sacred Temple of the Tooth Relic and botanical gardens.",
-        badges: ["Temple", "Culture"]
+        image: "/destinations/dest-kandy.jpg",
+        desc: "Cultural capital & Temple of the Tooth.",
+        badges: ["Culture"],
+        size: "normal",
+        meta: "Sacred City"
     },
     {
         id: "galle",
         name: "Galle Fort",
         category: "Heritage",
-        image: "/destinations/galle.jpg",
-        desc: "A preserved Dutch colonial walled city on the southern coast, blending history with tropical charm.",
-        badges: ["Colonial", "Coast"]
+        image: "/destinations/dest-galle.jpg",
+        desc: "Dutch colonial walled city on the coast.",
+        badges: ["Colonial"],
+        size: "wide",
+        meta: "UNESCO Fort"
     },
     {
-        id: "dambulla",
-        name: "Dambulla",
-        category: "Heritage",
-        image: "/gallery/buddha-statue.jpg", // Using statue as proxy for cave temple
-        desc: "Famous for the Golden Temple, a cave complex with well-preserved Buddhist statutes and paintings.",
-        badges: ["Caves", "Art"]
-    },
-    {
-        id: "jaffna",
-        name: "Jaffna",
-        category: "Heritage",
-        image: "/destinations/redesign/jaffna.jpg",
-        desc: "The northern capital, rich in Hindu culture, colonial history, and unique cuisine.",
-        badges: ["Hindu", "Fort"]
-    },
-
-    // NATURE (Hill Country & Rainforests)
-    {
-        id: "ella",
-        name: "Ella",
-        category: "Nature",
-        image: "/destinations/ella.jpg",
-        desc: "A hiking paradise in the central highlands, famous for the Nine Arch Bridge and stunning views.",
-        badges: ["Hiking", "Scenery"]
+        id: "mirissa",
+        name: "Mirissa",
+        category: "Beach",
+        image: "/destinations/dest-mirissa.jpg",
+        desc: "Whale watching and vibrant nightlife.",
+        badges: ["Whales"],
+        size: "normal",
+        meta: "Season: Nov-Apr"
     },
     {
         id: "nuwara-eliya",
         name: "Nuwara Eliya",
         category: "Nature",
-        image: "/destinations/redesign/nuwara-eliya.jpg",
-        desc: "Known as 'Little England', a city in the hill country surrounded by lush tea plantations.",
-        badges: ["Tea", "Cool Climate"]
+        image: "/destinations/dest-nuwara-eliya.jpg",
+        desc: "Little England of Sri Lanka.",
+        badges: ["Tea"],
+        size: "normal",
+        meta: "Mountains"
+    },
+    // Highlight: Trinco (Wide)
+    {
+        id: "trincomalee",
+        name: "Trincomalee",
+        category: "Beach",
+        image: "/destinations/dest-trincomalee.jpg",
+        desc: "Pristine white sands of the East Coast.",
+        badges: ["East Coast"],
+        size: "wide",
+        meta: "Best: May-Sep"
     },
     {
-        id: "horton-plains",
-        name: "Horton Plains",
-        category: "Nature",
-        image: "/gallery/tea-fields.jpg", // Using generic high country
-        desc: "A protected area in the central highlands covered by montane grassland and cloud forest.",
-        badges: ["World's End", "Hiking"]
-    },
-    {
-        id: "sinharaja",
-        name: "Sinharaja Forest",
-        category: "Nature",
-        image: "/gallery/waterfall.jpg", // Using waterfall
-        desc: "A biodiversity hotspot and UNESCO World Heritage Site, home to endemic species and lush rainforest.",
-        badges: ["Rainforest", "Birding"]
-    },
-    {
-        id: "knuckles",
-        name: "Knuckles Range",
-        category: "Nature",
-        image: "/gallery/ella-train.jpg", // Scenic mountains feel
-        desc: "A rugged mountain range offering some of the most scenic hiking trails and camping spots.",
-        badges: ["Adventure", "Mountains"]
-    },
-
-    // WILDLIFE (National Parks)
-    {
-        id: "yala",
-        name: "Yala National Park",
-        category: "Wildlife",
-        image: "/destinations/yala.jpg",
-        desc: "The premier wildlife sanctuary, boasting the highest density of leopards in the world.",
-        badges: ["Safari", "Leopards"]
+        id: "colombo",
+        name: "Colombo",
+        category: "City",
+        image: "/destinations/dest-colombo.jpg",
+        desc: "Vibrant commercial capital.",
+        badges: ["City"],
+        size: "normal",
+        meta: "Shopping"
     },
     {
         id: "udawalawe",
         name: "Udawalawe",
         category: "Wildlife",
-        image: "/destinations/redesign/elephant.jpg",
-        desc: "Famous for its large population of elephants and the Elephant Transit Home.",
-        badges: ["Elephants", "Safari"]
-    },
-    {
-        id: "wilpattu",
-        name: "Wilpattu",
-        category: "Wildlife",
-        image: "/gallery/wild-new.jpg", // Leopard image
-        desc: "The largest national park, known for its unique natural lakes and leopard sightings.",
-        badges: ["Lakes", "Leopards"]
-    },
-    {
-        id: "minneriya",
-        name: "Minneriya",
-        category: "Wildlife",
-        image: "/services/safari-jeep.jpg", // Jeep image
-        desc: "Famous for 'The Gathering', where hundreds of elephants congregate around the reservoir.",
-        badges: ["Elephants", "Seasonal"]
-    },
-
-    // BEACH (Coastal)
-    {
-        id: "mirissa",
-        name: "Mirissa",
-        category: "Beach",
-        image: "/destinations/redesign/mirissa.jpg",
-        desc: "A tropical beach paradise famous for whale watching, surfing, and vibrant nightlife.",
-        badges: ["Whales", "Surf"]
-    },
-    {
-        id: "unawatuna",
-        name: "Unawatuna",
-        category: "Beach",
-        image: "/gallery/beach-new.jpg", // Using generic beach
-        desc: "A popular crescent-shaped beach known for its coral reefs and calm swimming waters.",
-        badges: ["Swimming", "Reefs"]
+        image: "/destinations/dest-udawalawe.jpg",
+        desc: "Famous for elephant herds.",
+        badges: ["Elephants"],
+        size: "normal",
+        meta: "Year-Round"
     },
     {
         id: "hikkaduwa",
         name: "Hikkaduwa",
         category: "Beach",
-        image: "/gallery/sunset-palm.jpg",
-        desc: "Famous for its coral sanctuary, sea turtles, and golden sandy beaches.",
-        badges: ["Corals", "Turtles"]
-    },
-    {
-        id: "bentota",
-        name: "Bentota",
-        category: "Beach",
-        image: "/destinations/redesign/bentota.jpg",
-        desc: "A premier resort town known for water sports, luxury hotels, and river safaris.",
-        badges: ["Luxury", "Water Sports"]
-    },
-    {
-        id: "trincomalee",
-        name: "Trincomalee",
-        category: "Beach",
-        image: "/destinations/redesign/trincomalee.jpg",
-        desc: "Home to Nilaveli and Uppuveli beaches, offering pristine white sands and whale watching.",
-        badges: ["East Coast", "Diving"]
+        image: "/destinations/dest-hikkaduwa.jpg",
+        desc: "Coral reefs and sea turtles.",
+        badges: ["Corals"],
+        size: "normal",
+        meta: "Snorkeling"
     },
     {
         id: "arugam-bay",
         name: "Arugam Bay",
         category: "Beach",
-        image: "/gallery/surf-beach.jpg",
-        desc: "A world-renowned surfing destination on the east coast with a laid-back vibe.",
-        badges: ["Surfing", "Chill"]
+        image: "/destinations/dest-arugam-bay.jpg",
+        desc: "World-class surfing spots.",
+        badges: ["Surfing"],
+        size: "normal",
+        meta: "Surf Capital"
     },
-
-    // CITY
     {
-        id: "colombo",
-        name: "Colombo",
-        category: "City",
-        image: "/destinations/redesign/colombo.jpg",
-        desc: "The vibrant commercial capital, blending colonial architecture with modern skyscrapers.",
-        badges: ["Capital", "Shopping"]
+        id: "wilpattu",
+        name: "Wilpattu",
+        category: "Wildlife",
+        image: "/destinations/dest-wilpattu.jpg",
+        desc: "Land of lakes and leopards.",
+        badges: ["Lakes"],
+        size: "normal",
+        meta: "Secluded"
+    },
+    {
+        id: "dambulla",
+        name: "Dambulla",
+        category: "Heritage",
+        image: "/destinations/dest-dambulla.jpg",
+        desc: "Cave temple complex.",
+        badges: ["Caves"],
+        size: "normal",
+        meta: "Ancient Art"
+    },
+    {
+        id: "minneriya",
+        name: "Minneriya",
+        category: "Wildlife",
+        image: "/destinations/dest-minneriya.jpg",
+        desc: "The Great Elephant Gathering.",
+        badges: ["Elephants"],
+        size: "normal",
+        meta: "Event: Aug-Sep"
+    },
+    {
+        id: "bentota",
+        name: "Bentota",
+        category: "Beach",
+        image: "/destinations/dest-bentota.jpg",
+        desc: "Luxury resorts and water sports.",
+        badges: ["Luxury"],
+        size: "normal",
+        meta: "Relaxation"
+    },
+    {
+        id: "unawatuna",
+        name: "Unawatuna",
+        category: "Beach",
+        image: "/destinations/dest-unawatuna.jpg",
+        desc: "Calm waters and beach vibes.",
+        badges: ["Beach"],
+        size: "normal",
+        meta: "Family Safe"
     },
 ];
 
 const categories = ["All", "Heritage", "Nature", "Wildlife", "Beach", "City"];
 
 export default function DestinationsPage() {
-    const [activeCategory, setActiveCategory] = useState("All");
-
-    const filteredDestinations = activeCategory === "All"
-        ? allDestinations
-        : allDestinations.filter(d => d.category === activeCategory);
-
     return (
-        <>
+        <div className="bg-[#050505] min-h-screen text-white selection:bg-secondary selection:text-black">
             <HeroSection />
-
-            <section className="py-24 bg-gray-50 min-h-screen">
-                <div className="container-custom">
-
-                    {/* Filter Bar */}
-                    <div className="flex flex-wrap justify-center gap-4 mb-16">
-                        {categories.map((cat) => (
-                            <button
-                                key={cat}
-                                onClick={() => setActiveCategory(cat)}
-                                className={`px-8 py-3 rounded-full text-sm font-bold uppercase tracking-wider transition-all duration-300 ${activeCategory === cat
-                                    ? "bg-black text-white shadow-lg scale-105"
-                                    : "bg-white text-gray-500 hover:bg-gray-200"
-                                    }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Grid */}
-                    <motion.div
-                        layout
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8"
-                    >
-                        <AnimatePresence mode="popLayout">
-                            {filteredDestinations.map((dest) => (
-                                <DestinationCard key={dest.id} dest={dest} />
-                            ))}
-                        </AnimatePresence>
-                    </motion.div>
-                </div>
-            </section>
-        </>
+            <DestinationsBento />
+        </div>
     );
 }
 
@@ -261,90 +227,218 @@ function HeroSection() {
     });
 
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+    const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
     return (
-        <section ref={containerRef} className="relative h-[60vh] overflow-hidden bg-black">
-            <motion.div style={{ y }} className="absolute inset-0">
+        <section ref={containerRef} className="relative h-[85vh] overflow-hidden bg-black flex items-center justify-center">
+            {/* Parallax Background */}
+            <motion.div style={{ y }} className="absolute inset-0 z-0">
                 <Image
-                    src="/gallery/nine-arch.jpg"
-                    alt="Destinations"
+                    src="/destinations/dest-ella.jpg" // High impact image
+                    alt="Sri Lanka"
                     fill
-                    className="object-cover opacity-60"
+                    className="object-cover opacity-50 scale-105"
                     priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#050505]" />
             </motion.div>
 
-            <motion.div
-                style={{ opacity }}
-                className="relative h-full flex flex-col items-center justify-center text-center px-4"
-            >
+            {/* Content */}
+            <motion.div style={{ opacity }} className="relative z-10 text-center px-4 max-w-5xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
                 >
-                    <h1 className="text-5xl md:text-8xl font-serif text-white mb-6">
-                        Explore <span className="italic text-secondary">Sri Lanka</span>
+                    <h1 className="text-[15vw] md:text-[180px] leading-none font-serif font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/20 tracking-tighter mix-blend-overlay opacity-90">
+                        CEYLON
                     </h1>
-                    <p className="text-xl text-white/80 max-w-2xl mx-auto font-light">
-                        The Pearl of the Indian Ocean awaits, with adventures around every corner.
-                    </p>
                 </motion.div>
+
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 1 }}
+                    className="text-xl md:text-2xl text-white/80 font-light tracking-[0.2em] uppercase mt-[-2vw] md:mt-[-40px]"
+                >
+                    The Pearl of the Indian Ocean
+                </motion.p>
+            </motion.div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            >
+                <span className="text-[10px] uppercase tracking-widest text-white/40">Scroll to Explore</span>
+                <div className="w-[1px] h-12 bg-gradient-to-b from-secondary to-transparent" />
             </motion.div>
         </section>
     );
 }
 
-function DestinationCard({ dest }: { dest: typeof allDestinations[0] }) {
+function DestinationsBento() {
+    const [activeCategory, setActiveCategory] = useState("All");
+    const [searchQuery, setSearchQuery] = useState("");
+    const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+    const filteredDestinations = allDestinations.filter(dest => {
+        const matchesCategory = activeCategory === "All" || dest.category === activeCategory;
+        const matchesSearch = dest.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            dest.desc.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
+    return (
+        <section className="relative z-20 pb-32 px-4 md:px-8 -mt-20">
+            <div className="max-w-[1600px] mx-auto">
+
+                {/* Controls Header */}
+                <div className="flex flex-col xl:flex-row gap-8 justify-between items-end mb-16 px-2">
+                    {/* Search */}
+                    <div className="relative w-full xl:max-w-md group">
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <Search className="h-5 w-5 text-white/30 group-focus-within:text-secondary transition-colors" />
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Find your paradise..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="block w-full pl-12 pr-4 py-4 bg-white/5 border border-white/10 rounded-none focus:outline-none focus:border-secondary/50 focus:bg-white/10 text-white placeholder:text-white/20 transition-all font-light"
+                        />
+                    </div>
+
+                    {/* Categories */}
+                    <div className="flex flex-wrap gap-x-6 gap-y-2">
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
+                                className={cn(
+                                    "text-sm font-bold uppercase tracking-widest transition-all duration-300 relative pb-1",
+                                    activeCategory === category
+                                        ? "text-secondary"
+                                        : "text-white/40 hover:text-white"
+                                )}
+                            >
+                                {category}
+                                <span className={cn(
+                                    "absolute bottom-0 left-0 h-[2px] bg-secondary transition-all duration-300",
+                                    activeCategory === category ? "w-full" : "w-0"
+                                )} />
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* The Bento Grid */}
+                <motion.div
+                    layout
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[300px] md:auto-rows-[350px] gap-4"
+                >
+                    <AnimatePresence mode="popLayout">
+                        {filteredDestinations.map((dest) => (
+                            <BentoCard
+                                key={dest.id}
+                                dest={dest}
+                                hoveredId={hoveredId}
+                                setHoveredId={setHoveredId}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
+
+                {filteredDestinations.length === 0 && (
+                    <div className="text-center py-32 text-white/30 font-light text-xl">
+                        No destinations found matching your criteria.
+                    </div>
+                )}
+            </div>
+        </section>
+    );
+}
+
+function BentoCard({ dest, hoveredId, setHoveredId }: {
+    dest: Destination,
+    hoveredId: string | null,
+    setHoveredId: (id: string | null) => void
+}) {
+    // Determine grid span classes based on 'size'
+    const spanClasses = {
+        normal: "md:col-span-1 md:row-span-1",
+        large: "md:col-span-2 md:row-span-2",
+        wide: "md:col-span-2 md:row-span-1",
+        tall: "md:col-span-1 md:row-span-2",
+    };
+
+    const isHovered = hoveredId === dest.id;
+    const isDimmed = hoveredId !== null && !isHovered;
+
     return (
         <motion.div
             layout
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            animate={{
+                opacity: isDimmed ? 0.3 : 1,
+                scale: isDimmed ? 0.98 : 1,
+                filter: isDimmed ? "grayscale(100%)" : "grayscale(0%)"
+            }}
             exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3 }}
-            className="group relative h-[450px] rounded-sm overflow-hidden bg-black"
+            transition={{ duration: 0.4 }}
+            className={cn(
+                "group relative overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-500",
+                spanClasses[dest.size]
+            )}
+            onMouseEnter={() => setHoveredId(dest.id)}
+            onMouseLeave={() => setHoveredId(null)}
         >
             <Link href={`/contact?destination=${encodeURIComponent(dest.name)}`} className="block h-full w-full">
+
                 {/* Image */}
                 <Image
                     src={dest.image}
                     alt={dest.name}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-60"
+                    className="object-cover transition-transform duration-[1.5s] ease-in-out group-hover:scale-110"
                 />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                {/* Overlays */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-[2px]" />
 
                 {/* Content */}
-                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between">
 
-                    {/* Badges */}
-                    <div className="flex gap-2 mb-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-                        {dest.badges.map(badge => (
-                            <span key={badge} className="px-3 py-1 bg-secondary/90 text-black text-[10px] font-bold uppercase tracking-wider rounded-full">
-                                {badge}
-                            </span>
-                        ))}
+                    {/* Top Meta */}
+                    <div className="flex justify-between items-start transform -translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <span className="px-3 py-1 bg-secondary text-black text-[10px] font-black uppercase tracking-widest">
+                            {dest.category}
+                        </span>
+                        <div className="flex gap-2 text-white/80 text-xs">
+                            <Compass className="w-4 h-4" />
+                            <span>{dest.meta}</span>
+                        </div>
                     </div>
 
-                    <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-                        <div className="flex items-center gap-2 mb-2">
-                            <MapPin className="h-4 w-4 text-secondary" />
-                            <span className="text-secondary text-xs font-bold uppercase tracking-widest">{dest.category}</span>
-                        </div>
-                        <h3 className="text-3xl font-serif font-bold text-white mb-2 group-hover:text-secondary transition-colors">
+                    {/* Bottom Info */}
+                    <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                        <h3 className={cn(
+                            "font-serif font-bold text-white mb-2 leading-none transition-transform duration-500 origin-left",
+                            dest.size === 'large' ? "text-5xl group-hover:scale-90" : "text-3xl group-hover:scale-90"
+                        )}>
                             {dest.name}
                         </h3>
-                        <p className="text-white/70 text-sm line-clamp-3 mb-6 group-hover:text-white transition-colors">
-                            {dest.desc}
-                        </p>
 
-                        <div className="flex items-center gap-2 text-white text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            Explore <ArrowRight className="h-4 w-4" />
+                        <div className="overflow-hidden max-h-0 group-hover:max-h-[200px] transition-all duration-700 ease-out">
+                            <p className="text-white/70 text-sm font-light leading-relaxed mb-6 mt-2 max-w-[90%]">
+                                {dest.desc}
+                            </p>
+                            <div className="flex items-center gap-2 text-secondary text-xs font-bold uppercase tracking-widest">
+                                Explore <ArrowRight className="w-4 h-4 ml-2" />
+                            </div>
                         </div>
                     </div>
                 </div>
