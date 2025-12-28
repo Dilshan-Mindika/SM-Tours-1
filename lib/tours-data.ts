@@ -26,7 +26,7 @@ export const toursData: Tour[] = [
         title: "Classic Island Loop: Kandy to Coast",
         duration: "6 Days / 5 Nights",
         category: "Heritage",
-        image: "/tours/tour-card-tea.jpg",
+        image: "/tours/tour-kandy-lake.jpg",
         description: "The ultimate introductory tour covering the Elephant Orphanage, Temple of the Tooth, Tea Country, Yala Wildlife, and golden beaches.",
         inclusions: [
             "Private A/C vehicle with English-speaking chauffeur-guide",
@@ -52,7 +52,7 @@ export const toursData: Tour[] = [
         title: "Heritage, Nature & Hills",
         duration: "6 Days / 5 Nights",
         category: "Heritage",
-        image: "/tours/tour-card-heritage.jpg",
+        image: "/tours/tour-sigiriya-rock.jpg",
         description: "A deep dive into the Cultural Triangle, ancient capitals, and the misty hills of Nuwara Eliya.",
         inclusions: [
             "A/C Transport with English-speaking chauffeur-guide",
@@ -78,7 +78,7 @@ export const toursData: Tour[] = [
         title: "Southern Explorer: Coastal Beauty",
         duration: "6 Days / 5 Nights",
         category: "Beach",
-        image: "/tours/tour-card-wildlife.jpg",
+        image: "/tours/tour-galle-lighthouse.jpg",
         description: "From the colonial charm of Galle to the wild leopards of Yala and the peaks of Ella.",
         inclusions: [
             "A/C Private Transport with English-speaking chauffeur-guide",
@@ -104,7 +104,7 @@ export const toursData: Tour[] = [
         title: "Wildlife, History & Culture (North-West Loop)",
         duration: "6 Days / 5 Nights",
         category: "Wildlife",
-        image: "/tours/tour-card-heritage.jpg",
+        image: "/tours/tour-wilpattu-leopard.jpg",
         description: "Dolphins, leopards, and ancient capitals. A unique route through Kalpitiya and Wilpattu.",
         inclusions: [
             "Private A/C Transport",
@@ -130,7 +130,7 @@ export const toursData: Tour[] = [
         title: "Complete Heritage & Nature Tour",
         duration: "7 Days / 6 Nights",
         category: "Heritage",
-        image: "/tours/tour-card-hiking.jpg",
+        image: "/tours/tour-anuradhapura-stupa.jpg",
         description: "An extensive journey through Anuradhapura, Wilpattu, Sigiriya, Kandy, Horton Plains, and Udawalawe.",
         inclusions: ["A/C transport", "3-star hotels", "All meals", "Entrance fees", "Safaris", "Guides", "Bottled water"],
         itinerary: [
@@ -170,7 +170,7 @@ export const toursData: Tour[] = [
         title: "Family Fun & Beach Leisure",
         duration: "7 Days / 6 Nights",
         category: "Family",
-        image: "/tours/tour-card-beach.jpg",
+        image: "/tours/tour-bentota-river.jpg",
         description: "A fun-filled tour with water parks, boat safaris, turtle hatcheries, and whale watching.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Guides", "Bottled water"],
         itinerary: [
@@ -190,7 +190,7 @@ export const toursData: Tour[] = [
         title: "Spiritual Sri Lanka Pilgrimage",
         duration: "7 Days / 6 Nights",
         category: "Heritage",
-        image: "/tours/tour-card-heritage.jpg",
+        image: "/tours/tour-dambulla-cave.jpg",
         description: "A journey through sacred sites including Anuradhapura, Mihintale, Kandy, and Kataragama.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Guides", "Bottled water"],
         itinerary: [
@@ -210,7 +210,7 @@ export const toursData: Tour[] = [
         title: "Adventure & Trekking Tour",
         duration: "7 Days / 6 Nights",
         category: "Adventure",
-        image: "/tours/tour-card-adventure.jpg",
+        image: "/tours/tour-kitulgala-rafting.jpg",
         description: "For the thrill-seekers: rafting, night climbs, and scenic treks.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Guides", "Bottled water"],
         itinerary: [
@@ -250,7 +250,7 @@ export const toursData: Tour[] = [
         title: "Coastal Circle Tour",
         duration: "7 Days / 6 Nights",
         category: "Beach",
-        image: "/tours/tour-card-beach.jpg",
+        image: "/tours/tour-kalpitiya-dolphins.jpg",
         description: "A loop around the coast: dolphins in Kalpitiya, turtles in Bentota, and whales in Mirissa.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Boat safaris", "Guides", "Bottled water"],
         itinerary: [
@@ -270,7 +270,7 @@ export const toursData: Tour[] = [
         title: "Leisure & Heritage Retreat",
         duration: "6 Days / 5 Nights",
         category: "Family",
-        image: "/tours/tour-card-tea.jpg",
+        image: "/tours/tour-unawatuna-beach.jpg",
         description: "A relaxed pace tour focusing on beaches, boat safaris, colonial heritage, and turtle conversation.",
         inclusions: ["Private A/C vehicle", "3★ hotels", "Breakfast, lunch & dinner", "Entrance fees", "Bottled water"],
         itinerary: [
@@ -292,7 +292,7 @@ export const toursData: Tour[] = [
         title: "Cultural Triangle Essentials",
         duration: "3 Days / 2 Nights",
         category: "Heritage",
-        image: "/destinations/sigiriya.jpg",
+        image: "/tours/tour-dambulla-cave.jpg",
         description: "A condensed journey through Sri Lanka's ancient capitals and rock fortresses.",
         inclusions: ["Private A/C transport", "3-star hotels", "Breakfast & Dinner", "Entrance fees", "Driver/Guide"],
         itinerary: [
@@ -306,7 +306,7 @@ export const toursData: Tour[] = [
         title: "Hill Country Escape",
         duration: "3 Days / 2 Nights",
         category: "Nature",
-        image: "/destinations/redesign/nuwara-eliya.jpg",
+        image: "/tours/tour-nuwara-eliya-colonial.jpg",
         description: "Escape to the cool climate of Kandy and Nuwara Eliya with scenic train rides and tea plantations.",
         inclusions: ["Private A/C transport", "3-star hotels", "Breakfast & Dinner", "Train tickets", "Driver/Guide"],
         itinerary: [
@@ -325,7 +325,7 @@ export const toursData: Tour[] = [
         title: "Kandy & Pinnawala Cultural Combo",
         duration: "2 Days / 1 Night",
         category: "Heritage",
-        image: "/destinations/kandy.jpg",
+        image: "/tours/tour-pinnawala-elephants.jpg",
         description: "Elephants, Temples, and Botanical Gardens in a quick 2-day getaway.",
         inclusions: ["Private A/C transport", "Hotel (1 Night)", "Meals", "Entrance Tickets", "Guide"],
         itinerary: [
@@ -338,7 +338,7 @@ export const toursData: Tour[] = [
         title: "Sigiriya & Dambulla Rock Tour",
         duration: "2 Days / 1 Night",
         category: "Heritage",
-        image: "/destinations/sigiriya.jpg",
+        image: "/tours/tour-sigiriya-lion-paw.jpg",
         description: "Explore the two most iconic rock formations and ancient temples of the Cultural Triangle.",
         inclusions: ["Private A/C transport", "Hotel (1 Night)", "Meals", "Entrance Tickets", "Guide"],
         itinerary: [
@@ -351,7 +351,7 @@ export const toursData: Tour[] = [
         title: "Galle Fort & Unawatuna Escape",
         duration: "2 Days / 1 Night",
         category: "Beach",
-        image: "/destinations/galle.jpg",
+        image: "/tours/tour-unawatuna-beach.jpg",
         description: "Colonial heritage meets tropical beaches on the southern coast.",
         inclusions: ["Private A/C transport", "Hotel (1 Night)", "Meals", "Entrance Tickets", "Guide"],
         itinerary: [
@@ -364,7 +364,7 @@ export const toursData: Tour[] = [
         title: "Nuwara Eliya Tea & Hills",
         duration: "2 Days / 1 Night",
         category: "Nature",
-        image: "/destinations/redesign/nuwara-eliya.jpg",
+        image: "/tours/tour-ramboda-falls.jpg",
         description: "Experience 'Little England' with waterfalls, tea factories, and cool mountain air.",
         inclusions: ["Private A/C transport", "Hotel (1 Night)", "Meals", "Entrance Tickets", "Guide"],
         itinerary: [
@@ -377,7 +377,7 @@ export const toursData: Tour[] = [
         title: "Ella Train & Mountain Escape",
         duration: "2 Days / 1 Night",
         category: "Adventure",
-        image: "/destinations/ella.jpg",
+        image: "/tours/tour-nine-arch-bridge-train.jpg",
         description: "Ride the famous scenic train and hike the green peaks of Ella.",
         inclusions: ["Private A/C transport", "Hotel (1 Night)", "Meals", "Train Tickets", "Guide"],
         itinerary: [
@@ -395,7 +395,7 @@ export const toursData: Tour[] = [
         title: "Sigiriya & Dambulla Day Tour",
         duration: "1 Day",
         category: "Heritage",
-        image: "/destinations/sigiriya.jpg",
+        image: "/tours/tour-sigiriya-aerial.jpg",
         description: "Climb the majestic Sigiriya Rock Fortress and explore the Dambulla Cave Temple in a single day.",
         inclusions: ["Private A/C transport", "Breakfast & Lunch", "Entrance tickets", "Driver/Guide"],
         itinerary: [
@@ -411,7 +411,7 @@ export const toursData: Tour[] = [
         title: "Kandy Cultural Day Tour",
         duration: "1 Day",
         category: "Heritage",
-        image: "/destinations/redesign/elephant.jpg",
+        image: "/tours/tour-kandy-lake.jpg",
         description: "Visit the Temple of the Tooth, Botanical Gardens, and Elephant Orphanage.",
         inclusions: ["Private A/C transport", "Breakfast & Lunch", "Entrance tickets", "Driver/Guide"],
         itinerary: [
@@ -427,7 +427,7 @@ export const toursData: Tour[] = [
         title: "Mirissa Whale Watching Day Tour",
         duration: "1 Day",
         category: "Wildlife",
-        image: "/destinations/redesign/trincomalee.jpg",
+        image: "/tours/tour-kalpitiya-dolphins.jpg",
         description: "Witness the majestic Blue Whales off the coast of Mirissa (Season: Nov-Apr).",
         inclusions: ["Private A/C transport", "Whale Watching Tickets", "Breakfast", "Driver/Guide"],
         itinerary: [
@@ -442,7 +442,7 @@ export const toursData: Tour[] = [
         title: "Kitulgala White Water Rafting",
         duration: "1 Day",
         category: "Adventure",
-        image: "/destinations/ella.jpg",
+        image: "/tours/tour-kitulgala-rafting.jpg",
         description: "Adrenaline-pumping white water rafting on the Kelani River.",
         inclusions: ["Private A/C transport", "Rafting Gear & Guide", "Lunch", "Driver"],
         itinerary: [
@@ -457,7 +457,7 @@ export const toursData: Tour[] = [
         title: "Galle Heritage & Beach Day",
         duration: "1 Day",
         category: "Beach",
-        image: "/destinations/galle.jpg",
+        image: "/tours/tour-galle-lighthouse.jpg",
         description: "Explore the UNESCO World Heritage Galle Fort and relax on the southern beaches.",
         inclusions: ["Private A/C transport", "Guide", "Lunch", "Entrance fees"],
         itinerary: [
@@ -472,7 +472,7 @@ export const toursData: Tour[] = [
         title: "Colombo City & Cultural Tour",
         duration: "1 Day",
         category: "Heritage",
-        image: "/hero-bg.png",
+        image: "/tours/tour-card-heritage.jpg",
         description: "Discover the vibrant capital, from colonial buildings to modern shopping.",
         inclusions: ["Private A/C transport", "Guide", "Lunch", "Entrance fees"],
         itinerary: [
