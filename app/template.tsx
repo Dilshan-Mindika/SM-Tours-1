@@ -26,24 +26,24 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 {images.map((src, i) => (
                     <motion.div
                         key={i}
-                        className="relative h-full w-full bg-black overflow-hidden border-r border-white/10 last:border-r-0"
+                        className="relative h-full w-full bg-black overflow-hidden border-r border-white/5 last:border-r-0"
                         initial={{ y: 0 }}
                         animate={{
                             y: "-100%",
                             transition: {
                                 duration: 1,
                                 ease: [0.76, 0, 0.24, 1], // Quint easing
-                                delay: 1.5 + (i * 0.1) // Wait for text, then stagger
+                                delay: 1.8 + (i * 0.1)
                             }
                         }}
                     >
-                        {/* Image with Parallax/Zoom effect */}
+                        {/* Image with Parallax/Zoom effect - DARKER */}
                         <motion.div
-                            className="relative h-full w-full"
-                            initial={{ scale: 1.2, filter: "grayscale(100%) brightness(0.5)" }}
+                            className="relative h-full w-full bg-black"
+                            initial={{ scale: 1.2, opacity: 0.4 }}
                             animate={{
                                 scale: 1,
-                                filter: "grayscale(0%) brightness(0.8)",
+                                opacity: 0.6, // Max opacity 60%
                                 transition: { duration: 1.5 }
                             }}
                         >
@@ -51,10 +51,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
                                 src={src}
                                 alt="Sri Lanka"
                                 fill
-                                className="object-cover"
+                                className="object-cover opacity-60" // Double down on opacity
                                 priority
                                 sizes="25vw"
                             />
+                            {/* Gradient Overlay for extra text protection */}
+                            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60" />
                         </motion.div>
                     </motion.div>
                 ))}
@@ -62,27 +64,28 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
             {/* Typography Overlay (Centered) */}
             <motion.div
-                className="fixed inset-0 z-[10000] flex flex-col items-center justify-center pointer-events-none mix-blend-difference text-white"
+                className="fixed inset-0 z-[10000] flex flex-col items-center justify-center pointer-events-none"
                 initial={{ opacity: 1 }}
                 animate={{
                     opacity: 0,
-                    transition: { duration: 0.5, delay: 1.2 }
+                    transition: { duration: 0.5, delay: 1.5 }
                 }}
             >
                 {/* Greeting Text */}
-                <div className="overflow-hidden mb-2">
-                    <div className="flex gap-1 md:gap-3">
+                <div className="overflow-hidden mb-8 relative z-10">
+                    <div className="flex gap-1 md:gap-4 justify-center">
                         {letters.map((letter, i) => (
                             <motion.span
                                 key={i}
-                                className="text-5xl md:text-9xl font-serif font-black tracking-tighter"
-                                initial={{ y: "100%" }}
+                                className="text-6xl md:text-[8rem] lg:text-[10rem] font-serif font-black text-white tracking-tight leading-none drop-shadow-[0_5px_5px_rgba(0,0,0,1)]"
+                                initial={{ y: "100%", opacity: 0 }}
                                 animate={{
                                     y: 0,
+                                    opacity: 1,
                                     transition: {
-                                        duration: 0.6,
+                                        duration: 0.8,
                                         ease: [0.33, 1, 0.68, 1],
-                                        delay: 0.1 + (i * 0.05)
+                                        delay: 0.2 + (i * 0.05)
                                     }
                                 }}
                             >
@@ -94,19 +97,19 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
                 {/* Subtext */}
                 <motion.div
-                    className="flex items-center gap-4 overflow-hidden"
+                    className="flex items-center gap-6 overflow-hidden relative z-10"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{
                         opacity: 1,
                         y: 0,
-                        transition: { duration: 0.6, delay: 0.8 }
+                        transition: { duration: 0.8, delay: 1 }
                     }}
                 >
-                    <div className="h-[1px] w-12 bg-white" />
-                    <p className="text-xs md:text-sm font-sans tracking-[0.5em] uppercase font-bold">
+                    <div className="h-[1px] w-16 md:w-32 bg-white box-shadow-lg" />
+                    <p className="text-sm md:text-xl font-sans tracking-[0.6em] uppercase font-bold text-white drop-shadow-lg">
                         Welcome to Paradise
                     </p>
-                    <div className="h-[1px] w-12 bg-white" />
+                    <div className="h-[1px] w-16 md:w-32 bg-white box-shadow-lg" />
                 </motion.div>
             </motion.div>
 
@@ -115,7 +118,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 initial={{ opacity: 0 }}
                 animate={{
                     opacity: 1,
-                    transition: { duration: 0.5, delay: 1.6 }
+                    transition: { duration: 0.5, delay: 1.9 }
                 }}
             >
                 {children}
