@@ -26,7 +26,7 @@ export const toursData: Tour[] = [
         title: "Classic Island Loop: Kandy to Coast",
         duration: "6 Days / 5 Nights",
         category: "Heritage",
-        image: "/destinations/redesign/nuwara-eliya.jpg",
+        image: "/tours/tour-card-tea.jpg",
         description: "The ultimate introductory tour covering the Elephant Orphanage, Temple of the Tooth, Tea Country, Yala Wildlife, and golden beaches.",
         inclusions: [
             "Private A/C vehicle with English-speaking chauffeur-guide",
@@ -52,7 +52,7 @@ export const toursData: Tour[] = [
         title: "Heritage, Nature & Hills",
         duration: "6 Days / 5 Nights",
         category: "Heritage",
-        image: "/destinations/sigiriya.jpg",
+        image: "/tours/tour-card-heritage.jpg",
         description: "A deep dive into the Cultural Triangle, ancient capitals, and the misty hills of Nuwara Eliya.",
         inclusions: [
             "A/C Transport with English-speaking chauffeur-guide",
@@ -78,7 +78,7 @@ export const toursData: Tour[] = [
         title: "Southern Explorer: Coastal Beauty",
         duration: "6 Days / 5 Nights",
         category: "Beach",
-        image: "/destinations/yala.jpg",
+        image: "/tours/tour-card-wildlife.jpg",
         description: "From the colonial charm of Galle to the wild leopards of Yala and the peaks of Ella.",
         inclusions: [
             "A/C Private Transport with English-speaking chauffeur-guide",
@@ -104,7 +104,7 @@ export const toursData: Tour[] = [
         title: "Wildlife, History & Culture (North-West Loop)",
         duration: "6 Days / 5 Nights",
         category: "Wildlife",
-        image: "/destinations/redesign/anuradhapura.jpg",
+        image: "/tours/tour-card-heritage.jpg",
         description: "Dolphins, leopards, and ancient capitals. A unique route through Kalpitiya and Wilpattu.",
         inclusions: [
             "Private A/C Transport",
@@ -130,7 +130,7 @@ export const toursData: Tour[] = [
         title: "Complete Heritage & Nature Tour",
         duration: "7 Days / 6 Nights",
         category: "Heritage",
-        image: "/destinations/redesign/polonnaruwa.jpg",
+        image: "/tours/tour-card-hiking.jpg",
         description: "An extensive journey through Anuradhapura, Wilpattu, Sigiriya, Kandy, Horton Plains, and Udawalawe.",
         inclusions: ["A/C transport", "3-star hotels", "All meals", "Entrance fees", "Safaris", "Guides", "Bottled water"],
         itinerary: [
@@ -150,7 +150,7 @@ export const toursData: Tour[] = [
         title: "East Coast Adventure (May–Sept)",
         duration: "7 Days / 6 Nights",
         category: "Beach",
-        image: "/destinations/redesign/trincomalee.jpg",
+        image: "/tours/tour-card-beach.jpg",
         description: "Perfect for the summer season: Trincomalee beaches, Pigeon Island snorkeling, and the Cultural Triangle.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Snorkeling", "Guides", "Bottled water"],
         itinerary: [
@@ -170,7 +170,7 @@ export const toursData: Tour[] = [
         title: "Family Fun & Beach Leisure",
         duration: "7 Days / 6 Nights",
         category: "Family",
-        image: "/destinations/redesign/bentota.jpg",
+        image: "/tours/tour-card-beach.jpg",
         description: "A fun-filled tour with water parks, boat safaris, turtle hatcheries, and whale watching.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Guides", "Bottled water"],
         itinerary: [
@@ -190,7 +190,7 @@ export const toursData: Tour[] = [
         title: "Spiritual Sri Lanka Pilgrimage",
         duration: "7 Days / 6 Nights",
         category: "Heritage",
-        image: "/destinations/redesign/polonnaruwa.jpg",
+        image: "/tours/tour-card-heritage.jpg",
         description: "A journey through sacred sites including Anuradhapura, Mihintale, Kandy, and Kataragama.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Guides", "Bottled water"],
         itinerary: [
@@ -210,7 +210,7 @@ export const toursData: Tour[] = [
         title: "Adventure & Trekking Tour",
         duration: "7 Days / 6 Nights",
         category: "Adventure",
-        image: "/destinations/ella.jpg",
+        image: "/tours/tour-card-adventure.jpg",
         description: "For the thrill-seekers: rafting, night climbs, and scenic treks.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Guides", "Bottled water"],
         itinerary: [
@@ -230,7 +230,7 @@ export const toursData: Tour[] = [
         title: "Wild Sri Lanka Safari Trail",
         duration: "7 Days / 6 Nights",
         category: "Wildlife",
-        image: "/destinations/redesign/elephant.jpg",
+        image: "/tours/tour-card-wildlife.jpg",
         description: "The ultimate wildlife loop: Wilpattu, Minneriya, Udawalawe, Yala, and Bundala.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Jeep safaris", "Guides", "Bottled water"],
         itinerary: [
@@ -250,7 +250,7 @@ export const toursData: Tour[] = [
         title: "Coastal Circle Tour",
         duration: "7 Days / 6 Nights",
         category: "Beach",
-        image: "/destinations/redesign/bentota.jpg",
+        image: "/tours/tour-card-beach.jpg",
         description: "A loop around the coast: dolphins in Kalpitiya, turtles in Bentota, and whales in Mirissa.",
         inclusions: ["Private A/C transport", "3-star hotels", "Meals", "Entrance fees", "Boat safaris", "Guides", "Bottled water"],
         itinerary: [
@@ -270,7 +270,7 @@ export const toursData: Tour[] = [
         title: "Leisure & Heritage Retreat",
         duration: "6 Days / 5 Nights",
         category: "Family",
-        image: "/destinations/redesign/bentota.jpg",
+        image: "/tours/tour-card-tea.jpg",
         description: "A relaxed pace tour focusing on beaches, boat safaris, colonial heritage, and turtle conversation.",
         inclusions: ["Private A/C vehicle", "3★ hotels", "Breakfast, lunch & dinner", "Entrance fees", "Bottled water"],
         itinerary: [
