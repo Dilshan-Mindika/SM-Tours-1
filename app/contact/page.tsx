@@ -7,62 +7,22 @@ import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { PageHero } from "@/components/sections/PageHero";
+
 export default function ContactPage() {
     return (
         <div className="bg-[#020202] min-h-screen text-white selection:bg-white selection:text-black overflow-x-hidden">
             <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('/noise.png')] mix-blend-overlay" />
 
-            <HeroSection />
+            <PageHero
+                image="/gallery/galle-fort.jpg"
+                title="CONTACT."
+                subtitle="Get in Touch"
+                description=""
+            />
             <ContactInfo />
             <InquirySection />
         </div>
-    );
-}
-
-function HeroSection() {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-    return (
-        <section ref={containerRef} className="relative h-[70vh] overflow-hidden flex items-center justify-center bg-black">
-            {/* Parallax Background */}
-            <motion.div style={{ y, scale: 1.1 }} className="absolute inset-0 z-0">
-                <Image
-                    src="/gallery/galle-fort.jpg"
-                    alt="Contact Us"
-                    fill
-                    className="object-cover opacity-40 grayscale-[20%]"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-[#020202]" />
-            </motion.div>
-
-            {/* Editorial Typography */}
-            <motion.div style={{ opacity }} className="relative z-10 text-center px-4">
-                <motion.p
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-xs font-bold tracking-[0.5em] uppercase text-white/60 mb-4"
-                >
-                    Get in Touch
-                </motion.p>
-                <motion.h1
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="text-[15vw] leading-[0.8] font-serif font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10 tracking-tighter mix-blend-overlay"
-                >
-                    CONTACT.
-                </motion.h1>
-            </motion.div>
-        </section>
     );
 }
 

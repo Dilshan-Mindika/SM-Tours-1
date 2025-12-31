@@ -8,6 +8,7 @@ import { toursData, Tour } from "../../lib/tours-data";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Search, SlidersHorizontal, MapPin } from "lucide-react";
 import Image from "next/image";
+import { PageHero } from "@/components/sections/PageHero";
 
 const categories = ["All", "Heritage", "Wildlife", "Beach", "Nature", "Adventure", "Family"];
 
@@ -20,54 +21,16 @@ const sortOptions = [
 export default function ToursPage() {
     return (
         <div className="bg-black min-h-screen">
-            <HeroSection />
+            <PageHero
+                image="/tours/tours-hero-new.jpg"
+                title={<span>Exclusive <span className="italic text-secondary">Journeys</span></span>}
+                subtitle="Curated Experiences"
+                description="Designed for the discerning traveler. Explore the unexplore in the Pearl of the Indian Ocean."
+            />
             <Suspense fallback={<div className="min-h-screen bg-black" />}>
                 <ToursGrid />
             </Suspense>
         </div>
-    );
-}
-
-function HeroSection() {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
-    return (
-        <section ref={containerRef} className="relative h-[70vh] overflow-hidden bg-black">
-            <motion.div style={{ y }} className="absolute inset-0">
-                <Image
-                    src="/tours/tours-hero-new.jpg"
-                    alt="Exclusive Journeys"
-                    fill
-                    className="object-cover opacity-60"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black" />
-            </motion.div>
-
-            <motion.div
-                style={{ opacity }}
-                className="relative h-full flex flex-col items-center justify-center text-center px-4"
-            >
-                <div className="flex items-center gap-3 mb-6">
-                    <div className="h-[1px] w-12 bg-secondary" />
-                    <span className="text-secondary text-sm font-black uppercase tracking-[0.3em]">Curated Experiences</span>
-                    <div className="h-[1px] w-12 bg-secondary" />
-                </div>
-                <h1 className="text-6xl md:text-9xl font-serif font-black text-white mb-8">
-                    Exclusive <span className="italic text-secondary">Journeys</span>
-                </h1>
-                <p className="text-xl text-white/80 max-w-2xl font-light leading-relaxed">
-                    Designed for the discerning traveler. Explore the unexplore in the Pearl of the Indian Ocean.
-                </p>
-            </motion.div>
-        </section>
     );
 }
 

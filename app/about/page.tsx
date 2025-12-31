@@ -1,75 +1,27 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Award, Heart, Globe, Users, ArrowRight, MapPin } from "lucide-react";
-import { useRef } from "react";
+import { PageHero } from "@/components/sections/PageHero";
 
 export default function AboutPage() {
     return (
         <>
-            <HeroSection />
+            <PageHero
+                image="/about/about-hero-new.jpg"
+                title={<span>Our <span className="italic text-secondary">Legacy</span></span>}
+                subtitle="Since 2010"
+                description="Curating extraordinary journeys through the heart of Sri Lanka."
+            />
             <StorySection />
             <ValuesSection />
             <TimelineSection />
             <VisionSection />
             <CTASection />
         </>
-    );
-}
-
-function HeroSection() {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-
-    return (
-        <section ref={containerRef} className="relative h-screen overflow-hidden bg-black">
-            <motion.div style={{ y }} className="absolute inset-0">
-                <Image
-                    src="/about/about-hero-new.jpg"
-                    alt="About SM Tours"
-                    fill
-                    className="object-cover opacity-70"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black" />
-            </motion.div>
-
-            <motion.div
-                style={{ opacity }}
-                className="relative h-full flex flex-col items-center justify-center text-center px-4"
-            >
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                >
-                    <h1 className="text-7xl md:text-9xl font-serif font-black text-white mb-6">
-                        Our <span className="italic text-secondary">Legacy</span>
-                    </h1>
-                    <div className="h-[2px] w-24 bg-secondary mx-auto mb-8" />
-                    <p className="text-xl md:text-2xl text-white/90 max-w-3xl font-light leading-relaxed tracking-wide">
-                        Curating extraordinary journeys through the heart of Sri Lanka
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.5, duration: 1 }}
-                    className="absolute bottom-10 text-secondary animate-bounce"
-                >
-                    <div className="w-[1px] h-16 bg-secondary mx-auto" />
-                </motion.div>
-            </motion.div>
-        </section>
     );
 }
 

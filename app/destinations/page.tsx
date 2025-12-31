@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Search, Compass, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PageHero } from "@/components/sections/PageHero";
 
 // --- Data with Bento Sizes & Atmospheric Meta ---
 type DestinationSize = "normal" | "large" | "wide" | "tall";
@@ -210,80 +211,23 @@ const itemVariants: Variants = {
     exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } }
 };
 
+
+// --- Data with Bento Sizes & Atmospheric Meta ---
+
 export default function DestinationsPage() {
     return (
         <div className="bg-[#020202] min-h-screen text-white selection:bg-white selection:text-black overflow-x-hidden">
             {/* Ambient Noise Texture */}
             <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('/noise.png')] mix-blend-overlay" />
 
-            <HeroSection />
+            <PageHero
+                image="/destinations/dest-ella.jpg"
+                title={<span>CEYLON</span>}
+                subtitle="The Pearl of the Indian Ocean"
+                description=""
+            />
             <DestinationsBento />
         </div>
-    );
-}
-
-function HeroSection() {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-    const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-    return (
-        <section ref={containerRef} className="relative h-screen overflow-hidden flex items-center justify-center">
-            {/* Background Image with Parallax */}
-            <motion.div style={{ y, scale: 1.1 }} className="absolute inset-0 z-0">
-                <Image
-                    src="/destinations/dest-ella.jpg"
-                    alt="Sri Lanka Landscape"
-                    fill
-                    className="object-cover opacity-60 grayscale-[20%]"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-[#020202]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#020202_90%)]" />
-            </motion.div>
-
-            {/* Editorial Typography */}
-            <motion.div style={{ opacity, y: textY }} className="relative z-10 text-center px-4 w-full">
-                <div className="overflow-hidden mb-2">
-                    <motion.p
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="text-xs md:text-sm font-bold tracking-[0.6em] uppercase text-white/60"
-                    >
-                        The Pearl of the Indian Ocean
-                    </motion.p>
-                </div>
-
-                <div className="relative">
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                        className="text-[18vw] leading-[0.85] font-serif font-black text-white mix-blend-overlay tracking-tighter"
-                    >
-                        CEYLON
-                    </motion.h1>
-
-                </div>
-            </motion.div>
-
-            {/* Scroll Hint */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 2, duration: 1 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
-            >
-                <div className="w-[1px] h-16 bg-gradient-to-b from-white/0 via-white/50 to-white/0 animate-pulse" />
-            </motion.div>
-        </section>
     );
 }
 

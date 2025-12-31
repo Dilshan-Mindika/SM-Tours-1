@@ -6,7 +6,6 @@ import { Stats } from "@/components/sections/Stats";
 import { VideoShowcase } from "@/components/sections/VideoShowcase";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
-import { Newsletter } from "@/components/sections/Newsletter";
 import { ParallaxGallery } from "@/components/sections/ParallaxGallery";
 
 export default function Home() {
@@ -21,7 +20,6 @@ export default function Home() {
       <DestinationsPreview />
       <Testimonials />
       <FAQ />
-      <Newsletter />
     </>
   );
 }

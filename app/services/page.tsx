@@ -9,6 +9,7 @@ import {
     Shield, ArrowRight, Star
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PageHero } from "@/components/sections/PageHero";
 
 // --- Data ---
 const services = [
@@ -93,70 +94,25 @@ const fleet = [
     }
 ];
 
+
+
 export default function ServicesPage() {
     return (
         <div className="bg-[#020202] min-h-screen text-white selection:bg-white selection:text-black overflow-x-hidden">
             {/* Ambient Noise Texture */}
             <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-[url('/noise.png')] mix-blend-overlay" />
 
-            <HeroSection />
+            <PageHero
+                image="/destinations/dest-yala.jpg"
+                title="SERVICE."
+                subtitle="Excellence in Motion"
+                description=""
+            />
             <Marquee />
             <ServicesGrid />
             <InteractiveFleet />
             <ConciergeExtras />
         </div>
-    );
-}
-
-function HeroSection() {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const blur = useTransform(scrollYProgress, [0, 0.5], ["0px", "10px"]);
-    const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
-    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-    return (
-        <section ref={containerRef} className="relative h-[85vh] overflow-hidden flex items-center justify-center bg-black">
-            {/* Parallax Background */}
-            <motion.div style={{ y, scale: 1.1 }} className="absolute inset-0 z-0">
-                <Image
-                    src="/destinations/dest-yala.jpg"
-                    alt="Premium Services"
-                    fill
-                    className="object-cover opacity-50 grayscale-[40%]"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-[#020202]" />
-            </motion.div>
-
-            {/* Kinetic Typography */}
-            <motion.div
-                style={{ opacity, filter: `blur(${blur})`, scale }}
-                className="relative z-10 text-center px-4"
-            >
-                <motion.p
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-xs font-bold tracking-[0.5em] uppercase text-white/60 mb-4"
-                >
-                    Excellence in Motion
-                </motion.p>
-                <motion.h1
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="text-[18vw] leading-[0.8] font-serif font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10 tracking-tighter mix-blend-overlay"
-                >
-                    SERVICE.
-                </motion.h1>
-            </motion.div>
-        </section>
     );
 }
 
