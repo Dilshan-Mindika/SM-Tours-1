@@ -5,6 +5,8 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const destinations = [
     {
@@ -35,22 +37,70 @@ const destinations = [
 
 export function DestinationsPreview() {
     const [activeId, setActiveId] = useState<string | null>("sigiriya");
+    const router = useRouter();
+
+    const handleNavigation = (name: string) => {
+        router.push(`/tours?search=${name}`);
+    };
 
     return (
         <section className="py-24 bg-black text-white">
-            <div className="h-[700px] w-full flex flex-col md:flex-row gap-4 px-4 md:px-0">
-                {destinations.map((dest) => (
-                    <DestinationCard
-                        key={dest.id}
-                        dest={dest}
-                        isActive={activeId === dest.id}
-                        onClick={() => setActiveId(dest.id)}
-                        onHover={() => setActiveId(dest.id)}
-                    />
-                ))}
+            <div className="flex flex-col lg:flex-row gap-4 h-[700px] w-full px-4 md:px-0 max-w-[1400px] mx-auto">
+                {destinations.map((dest) => {
+                    const isActive = activeId === dest.id;
+                    return (
+                        <div
+                            key={dest.id}
+                            onClick={() => handleNavigation(dest.name)}
+                            className={cn(
+                                "relative h-full transition-all duration-700 ease-[0.32,0.72,0,1] overflow-hidden cursor-pointer rounded-2xl border border-white/10 group",
+                                isActive ? "flex-[3]" : "flex-[1] hover:flex-[1.2]"
+                            )}
+                            onMouseEnter={() => setActiveId(dest.id)}
+                        >
+                            <Image
+                                src={dest.image}
+                                alt={dest.name}
+                                fill
+                                className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                                style={{
+                                    filter: isActive ? 'grayscale(0%)' : 'grayscale(100%)',
+                                    scale: isActive ? 1.1 : 1
+                                }}
+                            />
+                            <div className={cn(
+                                "absolute inset-0 transition-colors duration-500",
+                                isActive ? "bg-black/10" : "bg-black/60 group-hover:bg-black/40"
+                            )} />
+
+                            <div className="absolute bottom-0 left-0 p-8 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                                <h3 className={cn(
+                                    "font-serif font-black text-white transition-all duration-500 origin-left leading-none",
+                                    isActive
+                                        ? "text-5xl md:text-7xl mb-4 translate-y-0"
+                                        : "text-3xl rotate-0 lg:-rotate-90 lg:origin-bottom-left lg:absolute lg:bottom-10 lg:left-10 whitespace-nowrap opacity-80"
+                                )}>
+                                    {dest.name}
+                                </h3>
+
+                                <div className={cn(
+                                    "overflow-hidden transition-all duration-500",
+                                    isActive ? "opacity-100 max-h-[200px]" : "opacity-0 max-h-0"
+                                )}>
+                                    <p className="text-white/80 text-lg font-light mb-6 tracking-wide line-clamp-2">
+                                        {dest.desc}
+                                    </p>
+                                    <div className="w-12 h-12 bg-secondary flex items-center justify-center rounded-full hover:bg-white transition-colors duration-300">
+                                        <ArrowUpRight className="text-black h-6 w-6" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
 
-            <div className="mt-8 flex justify-center md:hidden">
+            <div className="mt-8 flex justify-center lg:hidden">
                 <Link href="/destinations" className="flex items-center gap-2 font-bold uppercase tracking-widest text-white hover:text-secondary transition-colors">
                     View All <ArrowUpRight className="h-5 w-5" />
                 </Link>
@@ -59,6 +109,8 @@ export function DestinationsPreview() {
     );
 }
 
+// The DestinationCard component is no longer used and can be removed if not used elsewhere.
+// For this change, it's kept as is, but it's effectively orphaned.
 function DestinationCard({ dest, isActive, onClick, onHover }: { dest: any, isActive: boolean, onClick: () => void, onHover: () => void }) {
     return (
         <motion.div
@@ -101,3 +153,4 @@ function DestinationCard({ dest, isActive, onClick, onHover }: { dest: any, isAc
         </motion.div>
     );
 }
+
