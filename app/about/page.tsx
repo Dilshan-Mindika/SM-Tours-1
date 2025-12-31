@@ -13,7 +13,7 @@ export default function AboutPage() {
             <PageHero
                 image="/about/about-hero-new.jpg"
                 title={<span>Our <span className="italic text-secondary">Legacy</span></span>}
-                subtitle="Since 2010"
+                subtitle="Since 2019"
                 description="Curating extraordinary journeys through the heart of Sri Lanka."
             />
             <StorySection />
@@ -73,7 +73,7 @@ function StorySection() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
                         </div>
                         <div className="absolute -bottom-10 -left-10 bg-white/10 backdrop-blur-md border border-white/20 p-10 max-w-xs rounded-2xl">
-                            <p className="text-6xl font-black text-secondary mb-2">15+</p>
+                            <p className="text-6xl font-black text-secondary mb-2">6+</p>
                             <p className="text-sm font-bold uppercase tracking-[0.2em] text-white">Years of Excellence</p>
                         </div>
                     </motion.div>
@@ -151,9 +151,9 @@ function ValuesSection() {
 
 function TimelineSection() {
     const milestones = [
-        { year: "2010", event: "Founded", desc: "Started with a vision to showcase authentic Sri Lanka" },
-        { year: "2015", event: "Expansion", desc: "Grew to 50+ expert local guides across the island" },
-        { year: "2020", event: "Recognition", desc: "Awarded Best Tour Operator by Sri Lanka Tourism" },
+        { year: "2019", event: "Foundation", desc: "Started with a vision to showcase authentic Sri Lanka" },
+        { year: "2022", event: "Expansion", desc: "Expanded our reach with expert local guides across the island" },
+        { year: "2024", event: "Recognition", desc: "Awarded Best Tour Operator by Sri Lanka Tourism" },
         { year: "2025", event: "Innovation", desc: "Launching sustainable ultra-luxury eco-tours" }
     ];
 
