@@ -2,7 +2,7 @@
 
 import { use, useState, useEffect } from "react";
 import { toursData } from "@/lib/tours-data";
-import { PageHeader } from "@/components/sections/PageHeader";
+
 import { motion } from "framer-motion";
 import { Check, Calendar, MapPin, Clock, ArrowRight, X } from "lucide-react";
 import Image from "next/image";
