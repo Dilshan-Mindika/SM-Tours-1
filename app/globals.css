@@ -59,3 +59,21 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 }
+
+@layer base {
+  .rdp {
+    --rdp-cell-size: 40px;
+    --rdp-accent-color: #FF6B00;
+    --rdp-background-color: #FF6B00;
+    --rdp-accent-color-dark: #FF6B00;
+    --rdp-outline: 2px solid #FF6B00;
+    --rdp-outline-selected: 2px solid #FF6B00;
+    margin: 0;
+  }
+
+  .rdp-button:focus-visible:not([disabled]) {
+    color: inherit;
+    background-color: transparent;
+    border: 2px solid #FF6B00;
+  }
+}

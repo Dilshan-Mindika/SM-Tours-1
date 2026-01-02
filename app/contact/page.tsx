@@ -4,9 +4,10 @@ import { useState, useEffect, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, ArrowRight, Calendar as CalendarIcon } from "lucide-react";
+import { format } from "date-fns";
 import { cn } from "@/lib/utils";
-
+import { Calendar } from "@/components/ui/calendar";
 import { PageHero } from "@/components/sections/PageHero";
 
 export default function ContactPage() {
@@ -79,15 +80,15 @@ function ContactInfo() {
 
 function InquirySection() {
     return (
-        <section className="py-32 relative">
+        <section className="py-16 md:py-32 relative">
             <div className="container-custom max-w-5xl">
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 md:gap-16">
 
                     {/* Left: Text */}
                     <div className="lg:col-span-2 space-y-8">
                         <div>
                             <span className="text-secondary text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Inquiry</span>
-                            <h2 className="text-5xl md:text-7xl font-serif text-white mb-6">
+                            <h2 className="text-4xl md:text-7xl font-serif text-white mb-6">
                                 Plan Your <span className="italic text-white/50">Journey</span>
                             </h2>
                             <p className="text-white/60 font-light leading-relaxed">
@@ -118,6 +119,8 @@ function ContactForm() {
     const [interest, setInterest] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [date, setDate] = useState<Date | undefined>(undefined);
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
     useEffect(() => {
         const tour = searchParams.get("tour");
@@ -129,9 +132,38 @@ function ContactForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setSubmitted(true);
+
+        // Collect form data
+        const formData = {
+            name: (e.target as any).name.value,
+            email: (e.target as any).email.value,
+            phone: (e.target as any).phone.value,
+            date: (e.target as any).date.value,
+            interest: interest,
+            message: (e.target as any).message.value,
+        };
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send message');
+            }
+
+            setSubmitted(true);
+        } catch (error) {
+            console.error(error);
+            // Show the actual error message for debugging
+            alert(error instanceof Error ? error.message : "Something went wrong");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (submitted) {
@@ -159,64 +191,95 @@ function ContactForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-8 bg-[#0A0A0A] p-8 md:p-12 border border-white/5 rounded-sm">
+        <form onSubmit={handleSubmit} className="space-y-8 bg-[#0A0A0A] p-6 md:p-12 border border-white/10 rounded-sm w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="group">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-secondary transition-colors">name</label>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/50 mb-2 group-focus-within:text-secondary transition-colors">name</label>
                     <input
+                        name="name"
                         type="text"
                         required
                         placeholder="John Doe"
-                        className="w-full bg-transparent border-b border-white/10 py-3 text-white placeholder:text-white/10 focus:outline-none focus:border-secondary transition-colors font-light"
+                        className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-colors font-light"
                     />
                 </div>
                 <div className="group">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-secondary transition-colors">email</label>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/50 mb-2 group-focus-within:text-secondary transition-colors">email</label>
                     <input
+                        name="email"
                         type="email"
                         required
                         placeholder="john@example.com"
-                        className="w-full bg-transparent border-b border-white/10 py-3 text-white placeholder:text-white/10 focus:outline-none focus:border-secondary transition-colors font-light"
+                        className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-colors font-light"
                     />
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="group">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-secondary transition-colors">phone</label>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/50 mb-2 group-focus-within:text-secondary transition-colors">phone</label>
                     <input
+                        name="phone"
                         type="tel"
                         placeholder="+1 (555) 000-0000"
-                        className="w-full bg-transparent border-b border-white/10 py-3 text-white placeholder:text-white/10 focus:outline-none focus:border-secondary transition-colors font-light"
+                        className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-colors font-light"
                     />
                 </div>
-                <div className="group">
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-secondary transition-colors">Date</label>
+                <div className="group relative">
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-white/50 mb-2 group-focus-within:text-secondary transition-colors">Date</label>
+                    <div
+                        onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+                        className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/40 cursor-pointer flex items-center justify-between"
+                    >
+                        <span className={cn("font-light", !date && "text-white/40")}>
+                            {date ? format(date, "PPP") : "Select a date"}
+                        </span>
+                        <CalendarIcon className="h-4 w-4 text-white/40" />
+                    </div>
+                    {/* Hidden input for form submission compatibility */}
                     <input
-                        type="date"
-                        className="w-full bg-transparent border-b border-white/10 py-3 text-white/80 focus:outline-none focus:border-secondary transition-colors font-light"
+                        type="hidden"
+                        name="date"
+                        value={date ? format(date, "yyyy-MM-dd") : ""}
                     />
+
+                    {isCalendarOpen && (
+                        <div className="absolute z-50 mt-2 bg-[#0A0A0A] border border-white/10 rounded-lg shadow-xl p-2 left-0 md:left-auto md:right-0">
+                            <Calendar
+                                mode="single"
+                                selected={date}
+                                onSelect={(newDate) => {
+                                    setDate(newDate);
+                                    setIsCalendarOpen(false);
+                                }}
+                                disabled={(date) => date < new Date()}
+                                initialFocus
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
 
             <div className="group">
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-secondary transition-colors">Interest</label>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-white/50 mb-2 group-focus-within:text-secondary transition-colors">Interest</label>
                 <input
+                    name="interest"
                     type="text"
                     value={interest}
                     onChange={(e) => setInterest(e.target.value)}
                     placeholder="E.g. Wildlife Tour, Ella..."
-                    className="w-full bg-transparent border-b border-white/10 py-3 text-white placeholder:text-white/10 focus:outline-none focus:border-secondary transition-colors font-light"
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-colors font-light"
                 />
             </div>
 
             <div className="group">
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 group-focus-within:text-secondary transition-colors">Message</label>
+                <label className="block text-[10px] font-bold uppercase tracking-widest text-white/50 mb-2 group-focus-within:text-secondary transition-colors">Message</label>
                 <textarea
+                    name="message"
                     required
                     rows={4}
                     placeholder="Tell us about your dream journey..."
-                    className="w-full bg-transparent border-b border-white/10 py-3 text-white placeholder:text-white/10 focus:outline-none focus:border-secondary transition-colors resize-none font-light"
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary transition-colors resize-none font-light"
                 />
             </div>
 
