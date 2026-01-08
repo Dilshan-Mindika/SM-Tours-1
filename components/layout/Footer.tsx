@@ -93,11 +93,28 @@ export function Footer() {
 
             </div>
 
-            <div className="container-custom mt-12 pt-8 border-t border-white/10 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p>&copy; {new Date().getFullYear()} SM Tours. All rights reserved.</p>
-                <div className="flex gap-6">
-                    <Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
-                    <Link href="/terms-of-service" className="hover:text-white">Terms of Service</Link>
+            <div className="container-custom mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+
+                {/* Left Side: Copyright & Legal */}
+                <div className="flex flex-col md:flex-row items-center gap-6 text-xs text-neutral-500 font-medium">
+                    <p>&copy; {new Date().getFullYear()} SM Tours. All rights reserved.</p>
+                    <div className="hidden md:block w-1 h-1 rounded-full bg-neutral-800" />
+                    <div className="flex gap-6">
+                        <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                        <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+                    </div>
+                </div>
+
+                {/* Right Side: Developer Credit */}
+                <div className="flex items-center justify-center md:justify-end gap-2 text-center md:text-right">
+                    <span className="text-[10px] text-white/30 uppercase tracking-wider">Design & Develop by</span>
+                    <Link
+                        href="https://dilshanmindika.pro"
+                        target="_blank"
+                        className="text-sm font-black text-white hover:text-secondary tracking-widest uppercase transition-all duration-300 inline-block hover:scale-105"
+                    >
+                        DILA
+                    </Link>
                 </div>
             </div>
         </footer>
