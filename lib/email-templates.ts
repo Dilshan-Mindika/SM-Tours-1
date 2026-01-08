@@ -132,8 +132,10 @@ export const generateCustomerEmail = (name: string) => {
             </div>
 
             <div class="footer">
-                SM Tours Sri Lanka • Colombo 03, Sri Lanka<br>
-                +94 77 123 4567 • hello@smtours.lk
+                SM Tours Sri Lanka<br>
+                No. 105, Kahanthota Road, Malabe, Sri Lanka<br>
+                +94 77 640 4091<br>
+                info@smtourssrilanka.com
             </div>
         </div>
     </body>

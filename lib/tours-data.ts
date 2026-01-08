@@ -284,6 +284,101 @@ export const toursData: Tour[] = [
     },
 
     // ==========================================
+    // 4-DAY TOURS
+    // ==========================================
+
+    // 13. Galle – Yala – Udawalawe – Bentota (4 Days)
+    {
+        id: "galle-yala-wildlife-beach",
+        title: "Galle, Yala & Southern Wildlife",
+        duration: "4 Days / 3 Nights",
+        category: "Wildlife",
+        image: "/tours/tour-yala-safari.png",
+        description: "A perfect mix of colonial heritage, pristine beaches, and thrilling wildlife safaris in Yala and Udawalawe.",
+        inclusions: [
+            "Private A/C vehicle with chauffeur-guide",
+            "Pickup/Drop-off: Colombo / Negombo / Airport",
+            "Accommodation with Breakfast (A/C rooms)",
+            "Daily breakfast, lunch, and dinner included",
+            "English-speaking licensed national guide",
+            "Jeep Safaris & Entry Tickets included"
+        ],
+        itinerary: [
+            { day: "Day 1", title: "Colombo → Galle → Unawatuna", desc: "Visit Galle Fort, Dutch Hospital & Lighthouse. Jungle Beach & Rumassala. Sunset at Unawatuna Beach. Overnight in Unawatuna." },
+            { day: "Day 2", title: "Unawatuna → Yala National Park", desc: "Dry Zone Botanical Garden. Evening Jeep Safari in Yala National Park (Leopards). Overnight near Yala." },
+            { day: "Day 3", title: "Yala → Udawalawe → Bentota", desc: "Optional AM Safari. Visit Udawalawe Elephant Transit Home. Travel to Bentota via Ratnapura. Relax at Bentota Beach. Overnight in Bentota." },
+            { day: "Day 4", title: "Bentota → Colombo", desc: "Madu River Boat Safari. Visit Kosgoda Turtle Hatchery. Return to Colombo." }
+        ]
+    },
+
+    // 14. Kandy – Nuwara Eliya – Ella – Colombo (4 Days)
+    {
+        id: "hill-country-train-ella",
+        title: "Hill Country, Train & Ella Vibes",
+        duration: "4 Days / 3 Nights",
+        category: "Nature",
+        image: "/tours/tour-nine-arch-bridge-train.jpg",
+        description: "Experience the cool climes of Nuwara Eliya, the iconic train ride to Ella, and the scenic beauty of the central highlands.",
+        inclusions: [
+            "Private A/C vehicle with chauffeur-guide",
+            "Train ride from Nuwara Eliya (Nanu Oya) to Ella",
+            "Daily breakfast, lunch, and dinner included",
+            "English-speaking licensed national guide",
+            "All entrance fees included"
+        ],
+        itinerary: [
+            { day: "Day 1", title: "Colombo → Pinnawala → Kandy", desc: "Pinnawala Elephant Orphanage. Temple of the Tooth Relic. Kandy Lake & Cultural Dance Show. Overnight in Kandy." },
+            { day: "Day 2", title: "Kandy → Ramboda → Nuwara Eliya", desc: "Ramboda Falls. Tea Factory & Tasting. Gregory Lake boat ride. Seetha Amman Temple. Overnight in Nuwara Eliya." },
+            { day: "Day 3", title: "Scenic Train Journey → Ella", desc: "Train from Nanu Oya to Ella. Nine Arches Bridge. Ravana Falls. Overnight in Ella." },
+            { day: "Day 4", title: "Ella → Diyaluma Falls → Colombo", desc: "Optional hike to Upper Diyaluma Falls. Scenic drive back to Colombo." }
+        ]
+    },
+
+    // 15. Hikkaduwa – Galle – Mirissa – Bentota (4 Days)
+    {
+        id: "southern-coast-beach-whales",
+        title: "Southern Coast, Whales & Turtles",
+        duration: "4 Days / 3 Nights",
+        category: "Beach",
+        image: "/tours/tour-mirissa-whales.png",
+        description: "The ultimate beach hopping tour covering Hikkaduwa corals, Galle Fort, Mirissa whales (seasonal), and Bentota river safari.",
+        inclusions: [
+            "Private A/C vehicle with chauffeur-guide",
+            "Daily breakfast, lunch, and dinner included",
+            "English-speaking licensed national guide",
+            "Whale Watching, Safari & Entrance tickets included"
+        ],
+        itinerary: [
+            { day: "Day 1", title: "Colombo → Hikkaduwa", desc: "Tsunami Memorial. Hikkaduwa Beach & Coral Sanctuary (snorkeling optional). Overnight in Hikkaduwa." },
+            { day: "Day 2", title: "Galle Fort → Unawatuna", desc: "Guided tour of Galle Fort & Lighthouse. Jungle Beach or Peace Pagoda. Sunset at Unawatuna. Overnight in Unawatuna." },
+            { day: "Day 3", title: "Mirissa Whale Watching → Bentota", desc: "Early morning Whale Watching. Relax at Mirissa Beach. Transfer to Bentota. Overnight in Bentota." },
+            { day: "Day 4", title: "Madu River → Turtle Hatchery → Colombo", desc: "Madu Ganga River Boat Safari. Kosgoda Turtle Hatchery. Return to Colombo." }
+        ]
+    },
+
+    // 16. Anuradhapura – Mihintale – Wilpattu (4 Days)
+    {
+        id: "ancient-cities-wilpattu-safari",
+        title: "Ancient Cities & Wilpattu Safari",
+        duration: "4 Days / 3 Nights",
+        category: "Heritage",
+        image: "/tours/tour-anuradhapura-stupa.jpg",
+        description: "Journey to the ancient capital of Anuradhapura and spot elusive leopards in Wilpattu National Park.",
+        inclusions: [
+            "Private A/C vehicle with chauffeur-guide",
+            "Daily breakfast, lunch, and dinner included",
+            "Licensed English-speaking national guide",
+            "Safari Jeep & Entrance fees included"
+        ],
+        itinerary: [
+            { day: "Day 1", title: "Colombo → Anuradhapura", desc: "Sri Maha Bodhi Tree. Abhayagiri Monastery. Thuparamaya. Jetavanaramaya Stupa. Overnight in Anuradhapura." },
+            { day: "Day 2", title: "Mihintale → Sacred City", desc: "Mihintale Sacred Rock Temple. Isurumuniya Lovers Temple. Ruwanwelisaya Stupa. Overnight in Anuradhapura." },
+            { day: "Day 3", title: "Wilpattu National Park Safari", desc: "Morning Jeep Safari in Wilpattu (Leopards/Bears). Relax/Nature walk near park. Overnight near Wilpattu." },
+            { day: "Day 4", title: "Puttalam Lagoon → Colombo", desc: "Scenic drive via Puttalam Lagoon. Dutch Church & Salt Pans (optional). Return to Colombo." }
+        ]
+    },
+
+    // ==========================================
     // 3-DAY TOURS
     // ==========================================
 
@@ -482,5 +577,5 @@ export const toursData: Tour[] = [
             { day: "02:00 PM", title: "Pettah Market", desc: "Shopping experience in Pettah." },
             { day: "04:00 PM", title: "Galle Face", desc: "Sunset at Galle Face Green." }
         ]
-    }
+    },
 ];
