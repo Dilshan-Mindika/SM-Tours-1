@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../../public/logo.png";
-import { Plane, Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { Plane, Facebook, Instagram, Twitter, Mail, Phone, MapPin, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Footer() {
@@ -20,26 +20,20 @@ export function Footer() {
                         destinations.
                     </p>
                     <div className="flex gap-4 pt-2">
-                        <Link href="https://facebook.com" className="hover:text-secondary transition-colors" aria-label="Facebook">
+                        <Link href="https://www.facebook.com/share/1G7oBwmVtx/" target="_blank" className="hover:text-secondary transition-colors" aria-label="Facebook">
                             <Facebook className="h-5 w-5" />
                         </Link>
-                        <Link href="https://instagram.com" className="hover:text-secondary transition-colors" aria-label="Instagram">
+                        <Link href="https://www.instagram.com/sm_tours__sri_lanka?igsh=MXA1dWh1NGxubjBlZg==" target="_blank" className="hover:text-secondary transition-colors" aria-label="Instagram">
                             <Instagram className="h-5 w-5" />
                         </Link>
-                        <Link href="https://tiktok.com" className="hover:text-secondary transition-colors" aria-label="TikTok">
+                        <Link href="https://www.tiktok.com/@sm_tours_sri_lanka?_r=1&_t=ZS-92tMdMHbRa8" target="_blank" className="hover:text-secondary transition-colors" aria-label="TikTok">
                             {/* Simple TikTok SVG Icon */}
                             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
                             </svg>
                         </Link>
-                        <Link href="https://google.com" className="hover:text-secondary transition-colors" aria-label="Google">
-                            {/* Simple Google SVG Icon */}
-                            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <path d="M12 8v4l3 3" /> {/* Abstract G/Clock representation or use standard G path if possible, but keeping simple */}
-                                <path d="M17.8 10c.1.7.2 1.3.2 2a6 6 0 0 1-8.3 5.5" />
-                                <path d="M12 12h5.8" />
-                            </svg>
+                        <Link href="https://www.linkedin.com/in/sm-tours-%F0%9F%87%B1%F0%9F%87%B0-00223a34b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" className="hover:text-secondary transition-colors" aria-label="LinkedIn">
+                            <Linkedin className="h-5 w-5" />
                         </Link>
                     </div>
                 </div>
